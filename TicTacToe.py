@@ -2,36 +2,19 @@ import time
 
 
 class TicTacToe:
-    player_symbol = ["X", "O"]
+    player_symbols = ["X", "O"]
 
     def __init__(self):
-        self.fields = {
-            1: " ",
-            2: " ",
-            3: " ",
-            4: " ",
-            5: " ",
-            6: " ",
-            7: " ",
-            8: " ",
-            9: " "
-        }
+        self.fields = {1: " ", 2: " ", 3: " ", 4: " ", 5: " ", 6: " ", 7: " ", 8: " ", 9: " "}
         self.player_turn = 1
+        self.victory_conditions = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
 
     def check_victory(self):
-        symbol = TicTacToe.player_symbol[self.get_player_minus1()]
-        if self.fields[1] == symbol and self.fields[2] == symbol and self.fields[3] == symbol:
-            return True
-        elif self.fields[4] == symbol and self.fields[5] == symbol and self.fields[6] == symbol:
-            return True
-        elif self.fields[7] == symbol and self.fields[8] == symbol and self.fields[9] == symbol:
-            return True
-        elif self.fields[1] == symbol and self.fields[5] == symbol and self.fields[9] == symbol:
-            return True
-        elif self.fields[7] == symbol and self.fields[5] == symbol and self.fields[3] == symbol:
-            return True
-        else:
-            return False
+        symbol = TicTacToe.player_symbols[self.get_player_minus1()]
+        for c in self.victory_conditions:
+            if self.fields[c[0]] == symbol and self.fields[c[1]] == symbol and self.fields[c[2]] == symbol:
+                return True
+        return False
 
     def victory(self):
         print(f"congratulations player{self.player_turn} you have won!")
@@ -81,7 +64,7 @@ class TicTacToe:
             return False
 
     def claim_field(self, field):
-        self.fields[field] = TicTacToe.player_symbol[self.get_player_minus1()]
+        self.fields[field] = TicTacToe.player_symbols[self.get_player_minus1()]
 
     def play(self):
         print("welcome to TicTacToe by Phaseoil!")
