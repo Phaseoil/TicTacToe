@@ -1,4 +1,4 @@
-import time
+import os
 
 
 class TicTacToe:
@@ -23,6 +23,9 @@ class TicTacToe:
         return self.player_turn - 1
 
     def print_field(self):
+        os.system('cls')
+        print("welcome to TicTacToe by Phaseoil!")
+        print("this is the playing field you'll be using")
         print(f""" {self.fields[1]} | {self.fields[2]} | {self.fields[3]}
  {self.fields[4]} | {self.fields[5]} | {self.fields[6]}
  {self.fields[7]} | {self.fields[8]} | {self.fields[9]}""")
@@ -48,11 +51,19 @@ class TicTacToe:
         print("yay, neither player1 nor player2 has won! it's a draw!")
 
     def get_userinput(self):
-        i = input("which field do you choose? (1-9)\n")
-        if int(i) in self.fields.keys():
-            return int(i)
-        else:
-            print("this field doesn't exist")
+        while True:
+            i = input("which field do you choose? (1-9)\n")
+            try:
+                int(i)
+            except ValueError:
+                self.print_field()
+                print("that isn't even a number...")
+                continue
+            if int(i) in self.fields.keys():
+                return int(i)
+            else:
+                self.print_field()
+                print("this field doesn't exist")
 
     def check_valid_field(self, field):
         if field in self.fields.keys():
@@ -67,9 +78,6 @@ class TicTacToe:
         self.fields[field] = TicTacToe.player_symbols[self.get_player_minus1()]
 
     def play(self):
-        print("welcome to TicTacToe by Phaseoil!")
-        time.sleep(1)
-        print("this is the playing field you'll be using")
         while True:
             self.print_field()
             print(f"player {self.player_turn}'s turn")
