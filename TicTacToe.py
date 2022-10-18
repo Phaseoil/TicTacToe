@@ -11,6 +11,10 @@ class TicTacToe:
         self.player_turn = 1
         self.victory_conditions = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
 
+    def clear(self):
+        self.fields = {1: " ", 2: " ", 3: " ", 4: " ", 5: " ", 6: " ", 7: " ", 8: " ", 9: " "}
+        self.player_turn = 1
+
     def check_victory(self):
         symbol = self.player_symbols[self.get_player_minus1()]
         for c in self.victory_conditions:
@@ -105,8 +109,8 @@ class TicTacToe:
         print("press space to play again or c to cancel")
         while True:
             if keyboard.is_pressed('space'):
-                spiel = TicTacToe()
-                spiel.play()
+                self.clear()
+                self.play()
             if keyboard.is_pressed('c'):
                 os._exit(0)
 
