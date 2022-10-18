@@ -76,13 +76,12 @@ class TicTacToe:
                 print("this field doesn't exist")
 
     def check_valid_field(self, field):
-        if field in self.fields.keys():
-            if self.fields[field] == " ":
-                return True
-            else:
-                return False
-        else:
+        if field not in self.fields.keys():
             return False
+        if self.fields[field] != " ":
+            return False
+        else:
+            return True
 
     def claim_field(self, field):
         self.fields[field] = TicTacToe.player_symbols[self.get_player_minus1()]
