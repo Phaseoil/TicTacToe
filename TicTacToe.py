@@ -1,4 +1,5 @@
 import os
+import keyboard
 
 
 class TicTacToe:
@@ -10,7 +11,7 @@ class TicTacToe:
         self.victory_conditions = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
 
     def check_victory(self):
-        symbol = TicTacToe.player_symbols[self.get_player_minus1()]
+        symbol = self.player_symbols[self.get_player_minus1()]
         for c in self.victory_conditions:
             if self.fields[c[0]] == symbol and self.fields[c[1]] == symbol and self.fields[c[2]] == symbol:
                 return True
@@ -96,7 +97,13 @@ class TicTacToe:
                 break
             self.change_turn()
         print("thank you for playing!")
-        input("press a button to leave")
+        print("press space to play again or c to cancel")
+        while True:
+            if keyboard.is_pressed('space'):
+                spiel = TicTacToe()
+                spiel.play()
+            if keyboard.is_pressed('c'):
+                os._exit(0)
 
 
 if __name__ == "__main__":
