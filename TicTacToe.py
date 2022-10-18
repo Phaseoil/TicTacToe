@@ -1,5 +1,6 @@
 import os
 import keyboard
+import platform
 
 
 class TicTacToe:
@@ -24,7 +25,11 @@ class TicTacToe:
         return self.player_turn - 1
 
     def print_field(self):
-        os.system('cls')
+        o_s = platform.system()
+        if o_s == "Windows":
+            os.system('cls')
+        else:
+            os.system('clear')
         print("welcome to TicTacToe by Phaseoil!")
         print("this is the playing field you'll be using")
         print(f""" {self.fields[1]} | {self.fields[2]} | {self.fields[3]}
